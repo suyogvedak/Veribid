@@ -1,19 +1,63 @@
-import { DefaultSession } from "next-auth";
+import { DefaultSession, DefaultUser } from "next-auth";
+import type { UserRole } from "@prisma/client";
+import { DefaultJWT } from "next-auth/jwt";
 
 declare module "next-auth" {
-interface Session {
-user: {
-id: string;
-role: string;
-isVerified: boolean;
-} & DefaultSession["user"];
-}
+
+  interface Session {
+
+    user: {
+
+      id: string;
+
+      username: string | null;
+
+      role: UserRole;
+
+      profileCompleted: boolean;
+
+      passwordCreated: boolean;
+
+      isVerified: boolean;
+
+    } & DefaultSession["user"];
+
+  }
+
+  interface User extends DefaultUser {
+
+    id: string;
+
+    username: string | null;
+
+    role: UserRole;
+
+    profileCompleted: boolean;
+
+    passwordCreated: boolean;
+
+    isVerified: boolean;
+
+  }
+
 }
 
 declare module "next-auth/jwt" {
-interface JWT {
-id: string;
-role: string;
-isVerified: boolean;
-}
+
+  interface JWT extends DefaultJWT {
+
+    id: string;
+
+    username: string | null;
+
+    role: UserRole;
+
+    profileCompleted: boolean;
+
+    passwordCreated: boolean;
+
+    isVerified: boolean;
+
+  }
+
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import {
   Menu,
@@ -26,7 +27,9 @@ import {
 import ThemeToggle from "../ui/theme-toggle";
 import Container from "../layout/container";
 
+
 export default function Navbar() {
+  const pathname = usePathname();
   const { data: session } = useSession();
 
   const [profileOpen, setProfileOpen] =
@@ -133,43 +136,47 @@ export default function Navbar() {
             <ThemeToggle />
 
             {!session ? (
-              <>
-                <Link
-                  href="/auth/login"
-                  className="
-                    px-5 py-2
-                    rounded-xl
-                    border border-[var(--border)]
-                    bg-[var(--card)]
-                    text-[var(--foreground)]
-                    hover:opacity-80
-                    transition-all
-                    cursor-pointer
-                  "
-                >
-                  Login
-                </Link>
+  <>
+    {pathname !== "/auth/login" && (
+      <Link
+        href="/auth/login"
+        className="
+          px-5 py-2
+          rounded-xl
+          border border-[var(--border)]
+          bg-[var(--card)]
+          text-[var(--foreground)]
+          hover:opacity-80
+          transition-all
+          cursor-pointer
+        "
+      >
+        Login
+      </Link>
+    )}
 
-                <Link
-                  href="/auth/signup"
-                  className="
-                    px-5 py-2
-                    rounded-xl
-                    bg-black
-                    text-white
-                    dark:bg-white
-                    dark:text-black
-                    hover:scale-105
-                    transition-all
-                    duration-300
-                    shadow-lg
-                    cursor-pointer
-                  "
-                >
-                  Sign Up
-                </Link>
-              </>
-            ) : (
+    {pathname !== "/auth/signup" && (
+      <Link
+        href="/auth/signup"
+        className="
+          px-5 py-2
+          rounded-xl
+          bg-black
+          text-white
+          dark:bg-white
+          dark:text-black
+          hover:scale-105
+          transition-all
+          duration-300
+          shadow-lg
+          cursor-pointer
+        "
+      >
+        Sign Up
+      </Link>
+    )}
+  </>
+) : (
               <div
                 className="relative"
                 ref={dropdownRef}

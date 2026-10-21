@@ -33,14 +33,33 @@ enum AuctionStatus {
 
 model User {
   id         String   @id @default(cuid())
+
   name       String?
-  username   String?  @unique
-  email      String   @unique
+  username   String? @unique
+  email      String  @unique
+
+  emailVerified DateTime?
+  
   password   String?
+
   image      String?
+
+  phoneNumber String?
+  location    String?
+  bio         String?
+
+  avatarUrl   String?
+
+  profileCompleted Boolean @default(false)
+  passwordCreated Boolean @default(false)
+
   role       UserRole @default(USER)
-  isVerified Boolean  @default(false)
-  reputation Int      @default(0)
+
+  isVerified Boolean @default(false)
+
+  reputation Int @default(0)
+
+  totalWins Int @default(0)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -169,4 +188,17 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+
+model PasswordResetToken {
+  id String @id @default(cuid())
+
+  email String
+
+  token String @unique
+
+  expires DateTime
+
+  createdAt DateTime @default(now())
 }

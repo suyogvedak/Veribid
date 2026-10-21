@@ -1,0 +1,15 @@
+export const PASSWORD_CONFIG = {
+
+  MIN_LENGTH: 12,
+
+  MAX_LENGTH: 128,
+
+  SALT_ROUNDS: 12,
+
+  MIN_ZXCVBN_SCORE: 3,
+
+  ENABLE_BREACH_CHECK: true,
+
+  ENABLE_PERSONAL_INFO_CHECK: true,
+
+} as const;
