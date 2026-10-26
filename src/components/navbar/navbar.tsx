@@ -67,9 +67,9 @@ export default function Navbar() {
 
   return (
     <nav
-      className=" \r\n
-        fixed top-0 left-0\r\n
-        w-full z-50\r\n
+      className="
+        fixed top-0 left-0
+        w-full z-50
         backdrop-blur-xl
         border-b border-[var(--border)]
         bg-[var(--card)]
